@@ -1,15 +1,23 @@
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+
 export function initControls(camera){
 
 document.body.addEventListener("click",()=>{
 document.body.requestPointerLock();
 });
 
-let pitch=0,yaw=0;
+let pitch=0;
+let yaw=0;
 
 let keys={};
 
-document.addEventListener("keydown",e=>keys[e.key]=true);
-document.addEventListener("keyup",e=>keys[e.key]=false);
+document.addEventListener("keydown",e=>{
+keys[e.key.toLowerCase()]=true;
+});
+
+document.addEventListener("keyup",e=>{
+keys[e.key.toLowerCase()]=false;
+});
 
 document.addEventListener("mousemove",e=>{
 if(document.pointerLockElement===document.body){
@@ -23,7 +31,7 @@ camera.rotation.set(pitch,yaw,0);
 }
 });
 
-function move(){
+function movement(){
 
 let speed=0.3;
 
@@ -40,8 +48,8 @@ if(keys["s"]) camera.position.addScaledVector(dir,-speed);
 if(keys["a"]) camera.position.addScaledVector(right,speed);
 if(keys["d"]) camera.position.addScaledVector(right,-speed);
 
-requestAnimationFrame(move);
+requestAnimationFrame(movement);
 }
 
-move();
+movement();
 }
