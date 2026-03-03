@@ -1,4 +1,3 @@
-
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
 
 export function initControls(camera){
@@ -34,14 +33,14 @@ camera.rotation.set(pitch,yaw,0);
 
 function movement(){
 
-let speed=0.3;
+const speed=0.3;
 
-let dir=new THREE.Vector3();
+const dir=new THREE.Vector3();
 camera.getWorldDirection(dir);
 dir.y=0;
 dir.normalize();
 
-let right=new THREE.Vector3();
+const right=new THREE.Vector3();
 right.crossVectors(dir,new THREE.Vector3(0,1,0)).normalize();
 
 if(keys["w"]) camera.position.addScaledVector(dir,speed);
