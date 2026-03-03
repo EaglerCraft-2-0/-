@@ -11,9 +11,11 @@ export let renderer;
 
 async function init(){
 
+// Scene
 scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87CEEB);
 
+// Camera
 camera = new THREE.PerspectiveCamera(
 75,
 window.innerWidth/window.innerHeight,
@@ -21,16 +23,24 @@ window.innerWidth/window.innerHeight,
 1000
 );
 
-renderer = new THREE.WebGLRenderer({antialias:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
+// Renderer
+renderer = new THREE.WebGLRenderer({
+antialias:true
+});
+
+renderer.setSize(
+window.innerWidth,
+window.innerHeight
+);
+
 document.body.appendChild(renderer.domElement);
 
-// Lights
+// Lighting
 scene.add(new THREE.AmbientLight(0xffffff,0.6));
 
-let light=new THREE.DirectionalLight(0xffffff,1);
-light.position.set(100,200,100);
-scene.add(light);
+const sun = new THREE.DirectionalLight(0xffffff,1);
+sun.position.set(100,200,100);
+scene.add(sun);
 
 // Systems
 await initWorld(scene);
@@ -42,7 +52,9 @@ animate();
 }
 
 function animate(){
+
 requestAnimationFrame(animate);
+
 renderer.render(scene,camera);
 }
 
