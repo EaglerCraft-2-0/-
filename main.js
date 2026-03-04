@@ -59,3 +59,6 @@ renderer.render(scene,camera);
 }
 
 init();
+
+const player = initPlayer(camera);
+scene.add(player);
